@@ -5,6 +5,7 @@ abstract class Logger {
   Logger._internal();
 }
 
+@immutable
 class LoggerService extends Logger {
   static FileManager fileManager = FileManager();
 

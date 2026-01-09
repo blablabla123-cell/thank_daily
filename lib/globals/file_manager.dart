@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 abstract class BaseFileManager {
@@ -14,6 +15,7 @@ abstract class BaseFileManager {
   Future<void> clear();
 }
 
+@immutable
 class FileManager extends BaseFileManager {
   static late File _file;
   static final _instance = FileManager._internal();

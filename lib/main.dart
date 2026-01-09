@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thank_daily/globals/thank_factory.dart';
 import 'package:thank_daily/globals/file_manager.dart';
+import 'package:thank_daily/globals/user.dart';
 
 import 'globals/logger.dart';
 
@@ -17,6 +19,8 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  final UserDirector _userDirector = UserDirector();
+  final ThankUserBuilder _thankUserBuilder = ThankUserBuilder();
   String _content = '';
 
   Future<void> _getContent() async {
@@ -33,6 +37,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Thank Daily',
       home: Scaffold(
         body: Center(
           child: Column(
@@ -42,6 +47,10 @@ class _MainAppState extends State<MainApp> {
               TextButton(
                 onPressed: () {
                   LoggerService().log('Button save clicked!');
+                  // final thank = ThankFactory.thank(ThankType.others, 'for life', name: 'Alice');
+                  _userDirector.setBuilder(_thankUserBuilder);
+                  final user = _userDirector.createUser('Me', otherName: 'Bob');
+                  LoggerService().log(user.toString());
                   setState(() {});
                 },
                 child: const Text('Save'),
